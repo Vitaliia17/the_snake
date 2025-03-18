@@ -1,30 +1,29 @@
-import sys
 import pygame as pg
 from random import randint as rd
 
-# Константы для размеров поля и сетки.
+# Константы для размеров поля и сетки
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
 GRID_SIZE = 20
 GRID_WIDTH = SCREEN_WIDTH // GRID_SIZE
 GRID_HEIGHT = SCREEN_HEIGHT // GRID_SIZE
 
-# Направления движения.
+# Направления движения
 UP = (0, -1)
 DOWN = (0, 1)
 LEFT = (-1, 0)
 RIGHT = (1, 0)
 
-# Цвета.
+# Цвета
 BOARD_BACKGROUND_COLOR = (0, 0, 0)
 BORDER_COLOR = (93, 216, 228)
 APPLE_COLOR = (255, 0, 0)
 SNAKE_COLOR = (0, 255, 0)
 
-# Скорость движения змейки.
+# Скорость движения змейки
 SPEED = 20
 
-# Настройка игрового окна.
+# Настройка игрового окна
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
 pg.display.set_caption('Змейка')
 clock = pg.time.Clock()
@@ -34,7 +33,10 @@ class GameObject:
     """Основной класс, представляющий объекты игры."""
 
     def __init__(self, body_color=None) -> None:
-        self.position = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        self.position = (
+            SCREEN_WIDTH // 2,
+            SCREEN_HEIGHT // 2,
+        )
         self.body_color = body_color
 
     def draw_cell(self, position, color=None) -> None:
@@ -45,7 +47,8 @@ class GameObject:
         pg.draw.rect(screen, BORDER_COLOR, rect, 1)
 
     def draw(self):
-        """Метод для отрисовки объектов, должен быть переопределен в наследуемых классах."""
+        """Метод для отрисовки объектов.
+        Должен быть переопределен в наследуемых классах."""
         pass
 
     def set_random_position(self, occupied_positions) -> None:
@@ -109,7 +112,9 @@ class Snake(GameObject):
     def reset(self):
         """Сбрасывает змейку в начальное состояние."""
         self.length = 1
-        self.positions = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
+        self.positions = [
+            (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        ]
         self.direction = RIGHT
         self.next_direction = None
 
@@ -129,7 +134,6 @@ def handle_keys(snake):
     for event in pg.event.get():
         if event.type == pg.QUIT:
             pg.quit()
-            sys.exit()
         elif event.type == pg.KEYDOWN:
             if event.key == pg.K_UP and snake.direction != DOWN:
                 snake.next_direction = UP
@@ -139,28 +143,3 @@ def handle_keys(snake):
                 snake.next_direction = LEFT
             elif event.key == pg.K_RIGHT and snake.direction != LEFT:
                 snake.next_direction = RIGHT
-
-
-def main():
-    """Запускает игру."""
-    apple = Apple()
-    snake = Snake()
-
-    while True:
-        clock.tick(SPEED)
-        handle_keys(snake)
-        snake.update_direction()
-        snake.move()
-
-        if snake.positions[0] == apple.position:
-            snake.length += 1
-            apple.set_random_position(snake.positions)
-
-        screen.fill(BOARD_BACKGROUND_COLOR)
-        apple.draw()
-        snake.draw()
-        pg.display.update()
-
-
-if __name__ == "__main__":
-    main()
