@@ -145,3 +145,22 @@ def handle_keys(snake):
                 snake.next_direction = LEFT
             elif event.key == pg.K_RIGHT and snake.direction != LEFT:
                 snake.next_direction = RIGHT
+def main():
+    """Главная функция, запускающая игру."""
+    pg.init()
+    snake = Snake()
+    apple = Apple()
+
+    while True:
+        handle_keys(snake)
+        snake.update_direction()
+        snake.move()
+
+        screen.fill(BOARD_BACKGROUND_COLOR)
+        snake.draw()
+        apple.draw()
+        pg.display.update()
+        clock.tick(SPEED)
+
+if __name__ == "__main__":
+    main()
