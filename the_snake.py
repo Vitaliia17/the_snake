@@ -1,6 +1,7 @@
-import pygame as pg
 import sys
 from random import randint as rd
+
+import pygame as pg
 
 # Константы для размеров поля и сетки
 SCREEN_WIDTH = 640
@@ -48,8 +49,10 @@ class GameObject:
         pg.draw.rect(screen, BORDER_COLOR, rect, 1)
 
     def draw(self):
-        """Метод для отрисовки объектов.
-        Должен быть переопределен в наследуемых классах."""
+        """
+        Метод для отрисовки объектов.
+        Должен быть переопределен в наследуемых классах.
+        """
         pass
 
     def set_random_position(self, occupied_positions) -> None:
@@ -145,6 +148,8 @@ def handle_keys(snake):
                 snake.next_direction = LEFT
             elif event.key == pg.K_RIGHT and snake.direction != LEFT:
                 snake.next_direction = RIGHT
+
+
 def main():
     """Главная функция, запускающая игру."""
     pg.init()
@@ -161,6 +166,7 @@ def main():
         apple.draw()
         pg.display.update()
         clock.tick(SPEED)
+
 
 if __name__ == "__main__":
     main()
