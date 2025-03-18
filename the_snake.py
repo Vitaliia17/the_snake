@@ -2,29 +2,29 @@ import sys
 import pygame as pg
 from random import randint as rd
 
-# Константы для размеров поля и сетки
+# Константы для размеров поля и сетки.
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
 GRID_SIZE = 20
 GRID_WIDTH = SCREEN_WIDTH // GRID_SIZE
 GRID_HEIGHT = SCREEN_HEIGHT // GRID_SIZE
 
-# Направления движения
+# Направления движения.
 UP = (0, -1)
 DOWN = (0, 1)
 LEFT = (-1, 0)
 RIGHT = (1, 0)
 
-# Цвета
+# Цвета.
 BOARD_BACKGROUND_COLOR = (0, 0, 0)
 BORDER_COLOR = (93, 216, 228)
 APPLE_COLOR = (255, 0, 0)
 SNAKE_COLOR = (0, 255, 0)
 
-# Скорость движения змейки
+# Скорость движения змейки.
 SPEED = 20
 
-# Настройка игрового окна
+# Настройка игрового окна.
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
 pg.display.set_caption('Змейка')
 clock = pg.time.Clock()
