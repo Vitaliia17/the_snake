@@ -1,4 +1,5 @@
 import pygame as pg
+import sys
 from random import randint as rd
 
 # Константы для размеров поля и сетки
@@ -134,6 +135,7 @@ def handle_keys(snake):
     for event in pg.event.get():
         if event.type == pg.QUIT:
             pg.quit()
+            sys.exit()  # Исправление: корректный выход из игры
         elif event.type == pg.KEYDOWN:
             if event.key == pg.K_UP and snake.direction != DOWN:
                 snake.next_direction = UP
