@@ -83,6 +83,7 @@ class Apple(GameObject):
         """Устанавливает случайную позицию для яблока, избегая занятых мест."""
         self.set_random_position(occupied_positions)
 
+
 class Snake(GameObject):
     """Класс для змейки."""
 
@@ -97,7 +98,7 @@ class Snake(GameObject):
     def get_head_position(self):
         """Возвращает текущую позицию головы змейки."""
         return self.positions[0]
-        
+
     def update_direction(self):
         """Обновляет направление движения змейки."""
         if self.next_direction:
