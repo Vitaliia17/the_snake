@@ -79,6 +79,9 @@ class Apple(GameObject):
         pg.draw.rect(screen, self.body_color, rect)
         pg.draw.rect(screen, BORDER_COLOR, rect, 1)
 
+    def randomize_position(self, occupied_positions):
+        """Устанавливает случайную позицию для яблока, избегая занятых мест."""
+        self.set_random_position(occupied_positions)
 
 class Snake(GameObject):
     """Класс для змейки."""
@@ -91,6 +94,10 @@ class Snake(GameObject):
         self.next_direction = None
         self.last = None
 
+    def get_head_position(self):
+        """Возвращает текущую позицию головы змейки."""
+        return self.positions[0]
+        
     def update_direction(self):
         """Обновляет направление движения змейки."""
         if self.next_direction:
