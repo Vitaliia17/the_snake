@@ -1,20 +1,19 @@
 import sys
 from random import randint as rd
-
 import pygame as pg
 
-# Константы.
+# Константы
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 GRID_SIZE = 20
 GRID_WIDTH, GRID_HEIGHT = SCREEN_WIDTH // GRID_SIZE, SCREEN_HEIGHT // GRID_SIZE
 UP, DOWN, LEFT, RIGHT = (0, -1), (0, 1), (-1, 0), (1, 0)
 COLORS = {
-    "board": (0, 0, 0), "border": (93, 216, 228),
-    "apple": (255, 0, 0), "snake": (0, 255, 0)
+    'board': (0, 0, 0), 'border': (93, 216, 228),
+    'apple': (255, 0, 0), 'snake': (0, 255, 0)
 }
 START_SPEED, MAX_LENGTH = 10, 10
 
-# Инициализация.
+# Инициализация
 pg.init()
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pg.display.set_caption('Змейка')
@@ -22,20 +21,25 @@ clock = pg.time.Clock()
 
 
 def draw_rect(position, color):
+    """Рисует квадрат на экране."""
     rect = pg.Rect(position, (GRID_SIZE, GRID_SIZE))
     pg.draw.rect(screen, color, rect)
-    pg.draw.rect(screen, COLORS["border"], rect, 1)
+    pg.draw.rect(screen, COLORS['border'], rect, 1)
 
 
 class GameObject:
+    """Базовый класс игрового объекта."""
+
     def __init__(self, body_color):
         self.position = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
         self.body_color = body_color
 
     def get_position(self):
+        """Возвращает текущую позицию объекта."""
         return self.position
 
     def set_random_position(self, occupied_positions):
+        """Генерирует случайную позицию, избегая занятых мест."""
         while True:
             self.position = (
                 rd(0, GRID_WIDTH - 1) * GRID_SIZE,
@@ -46,31 +50,39 @@ class GameObject:
 
 
 class Apple(GameObject):
+    """Класс для яблока."""
+
     def __init__(self):
-        super().__init__(COLORS["apple"])
+        super().__init__(COLORS['apple'])
         self.set_random_position([])
 
     def draw(self):
+        """Рисует яблоко на экране."""
         draw_rect(self.position, self.body_color)
 
 
 class Snake(GameObject):
+    """Класс для змейки."""
+
     def __init__(self):
-        super().__init__(COLORS["snake"])
+        super().__init__(COLORS['snake'])
         self.length = 1
         self.positions = [self.position]
         self.direction = RIGHT
         self.next_direction = None
 
     def get_head_position(self):
+        """Возвращает позицию головы змейки."""
         return self.positions[0]
 
     def update_direction(self):
+        """Обновляет направление движения змейки."""
         if self.next_direction:
             self.direction = self.next_direction
             self.next_direction = None
 
     def move(self):
+        """Перемещает змейку в текущем направлении."""
         head_x, head_y = self.positions[0]
         dx, dy = self.direction
         new_head = (
@@ -87,11 +99,13 @@ class Snake(GameObject):
             self.positions.pop()
 
     def reset(self):
+        """Сбрасывает змейку в начальное состояние."""
         self.length = 1
         self.positions = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
         self.direction = RIGHT
 
     def draw(self):
+        """Рисует змейку на экране."""
         for position in self.positions:
             draw_rect(position, self.body_color)
 
@@ -123,6 +137,7 @@ def handle_keys(snake):
 
 
 def main():
+    """Главная функция игры."""
     global speed
     speed = START_SPEED
     snake, apple = Snake(), Apple()
@@ -136,12 +151,12 @@ def main():
             snake.length += 1
             apple.set_random_position(snake.positions)
 
-        screen.fill(COLORS["board"])
+        screen.fill(COLORS['board'])
         snake.draw()
         apple.draw()
 
         if snake.length >= MAX_LENGTH:
-            print("Победа! Достигнута максимальная длина змейки.")
+            print('Победа! Достигнута максимальная длина змейки.')
             pg.quit()
             sys.exit()
 
