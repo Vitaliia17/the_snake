@@ -1,6 +1,6 @@
 import sys
-from random import randint as rd
 import pygame as pg
+from random import randint as rd
 
 # Константы
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
@@ -156,7 +156,6 @@ def main():
         apple.draw()
 
         if snake.length >= MAX_LENGTH:
-            print('Победа! Достигнута максимальная длина змейки.')
             pg.quit()
             sys.exit()
 
