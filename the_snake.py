@@ -3,7 +3,7 @@ from random import randint as rd
 
 import pygame as pg
 
-# Константы
+# Константы.
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 GRID_SIZE = 20
 GRID_WIDTH, GRID_HEIGHT = SCREEN_WIDTH // GRID_SIZE, SCREEN_HEIGHT // GRID_SIZE
