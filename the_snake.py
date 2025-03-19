@@ -1,8 +1,7 @@
-
 import sys
-from random import randint as rd
 
 import pygame as pg
+from random import randint as rd
 
 # Константы
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
@@ -32,9 +31,9 @@ def draw_rect(position, color):
 class GameObject:
     """Базовый класс игрового объекта."""
 
-    def __init__(self, body_color):
+    def __init__(self, body_color=None):
         self.position = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-        self.body_color = body_color
+        self.body_color = body_color or COLORS['board']
 
     def get_position(self):
         """Возвращает текущую позицию объекта."""
