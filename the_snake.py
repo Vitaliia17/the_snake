@@ -14,7 +14,7 @@ COLORS = {
 }
 START_SPEED, MAX_LENGTH = 10, 10
 
-# Инициализация
+# Инициализация.
 pg.init()
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pg.display.set_caption('Змейка')
