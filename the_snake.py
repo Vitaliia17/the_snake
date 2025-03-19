@@ -22,7 +22,7 @@ clock = pg.time.Clock()
 
 
 def draw_rect(position, color):
-    rect = pg.rect(position, (GRID_SIZE, GRID_SIZE))
+    rect = pg.Rect(position, (GRID_SIZE, GRID_SIZE))
     pg.draw.rect(screen, color, rect)
     pg.draw.rect(screen, COLORS["border"], rect, 1)
 
