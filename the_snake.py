@@ -1,7 +1,8 @@
 
 import sys
-import pygame as pg
 from random import randint as rd
+
+import pygame as pg
 
 # Константы
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
