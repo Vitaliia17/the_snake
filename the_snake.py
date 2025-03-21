@@ -82,12 +82,13 @@ class Apple(GameObject):
 
 class Snake(GameObject):
     """Класс для змейки."""
-
     def __init__(self):
+        """Инициализирует объект змейки и вызывает метод сброса состояния."""
         super().__init__(SNAKE_COLOR)
         self.reset()
 
     def reset(self):
+        """Сбрасывает состояние змейки до начального."""
         self.length = 1
         self.positions = [
             (SCREEN_WIDTH // 2 // GRID_SIZE * GRID_SIZE,
