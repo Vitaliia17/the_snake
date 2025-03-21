@@ -156,6 +156,7 @@ def handle_keys(snake):
 
 
 def main():
+    """Основная функция запуска игры."""
     speed = START_SPEED
     snake = Snake()
     apple = Apple(snake.positions)
