@@ -82,6 +82,7 @@ class Apple(GameObject):
 
 class Snake(GameObject):
     """Класс для змейки."""
+
     def __init__(self):
         """Инициализирует объект змейки и вызывает метод сброса состояния."""
         super().__init__(SNAKE_COLOR)
