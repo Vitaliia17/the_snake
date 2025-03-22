@@ -87,6 +87,9 @@ class Snake(GameObject):
         """Инициализирует объект змейки и вызывает метод сброса состояния."""
         super().__init__(SNAKE_COLOR)
         self.reset()
+        self.positions = [self.position]
+        self.direction = RIGHT
+        self.next_direction = None
 
     def reset(self):
         """Сбрасывает состояние змейки до начального."""
@@ -111,11 +114,15 @@ class Snake(GameObject):
 
     def move(self):
         """Перемещает змейку в текущем направлении."""
-        head_x, head_y = self.positions[0]
+        head_x, head_y = self.get_head_position()
         direction_x, direction_y = self.direction
-        new_head_x = (head_x + direction_x * GRID_SIZE) % SCREEN_WIDTH
-        new_head_y = (head_y + direction_y * GRID_SIZE) % SCREEN_HEIGHT
-        self.positions.insert(0, (new_head_x, new_head_y))
+        self.positions.insert(
+            0,
+            (
+                (head_x + direction_x * GRID_SIZE) % SCREEN_WIDTH,
+                (head_y + direction_y * GRID_SIZE) % SCREEN_HEIGHT
+            )
+        )
         self.last = None
         if len(self.positions) > self.length:
             self.last = self.positions.pop()
@@ -125,16 +132,10 @@ class Snake(GameObject):
         if self.last:
             pg.draw.rect(
                 screen, BOARD_BACKGROUND_COLOR,
-                (self.last[0], self.last[1], GRID_SIZE, GRID_SIZE)
+                (*self.last, GRID_SIZE, GRID_SIZE)
             )
-
         for position in self.positions:
             self.draw_rect(position, self.body_color)
-
-
-def check_collision(snake):
-    """Проверяет столкновение змейки с самой собой."""
-    return snake.get_head_position() in snake.positions[1:]
 
 
 def handle_keys(snake):
@@ -174,10 +175,10 @@ def main():
             apple.randomize_position(snake.positions)
 
         # Проверка: столкнулась с собой
-        if check_collision(snake):
+        elif snake.get_head_position() in snake.positions[1:]:
             snake.reset()
-
-        screen.fill(BOARD_BACKGROUND_COLOR)
+            apple.randomize_position(snake.positions)
+            screen.fill(BOARD_BACKGROUND_COLOR)
         snake.draw()
         apple.draw()
 
