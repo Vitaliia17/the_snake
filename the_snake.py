@@ -87,9 +87,7 @@ class Snake(GameObject):
         """Инициализирует объект змейки и вызывает метод сброса состояния."""
         super().__init__(SNAKE_COLOR)
         self.reset()
-        self.positions = [self.position]
         self.direction = RIGHT
-        self.next_direction = None
 
     def reset(self):
         """Сбрасывает состояние змейки до начального."""
@@ -123,9 +121,10 @@ class Snake(GameObject):
                 (head_y + direction_y * GRID_SIZE) % SCREEN_HEIGHT
             )
         )
-        self.last = None
         if len(self.positions) > self.length:
             self.last = self.positions.pop()
+        elif len(self.positions) == self.length:
+            self.last = None
 
     def draw(self):
         """Рисует змейку на экране."""
