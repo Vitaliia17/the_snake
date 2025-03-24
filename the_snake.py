@@ -123,15 +123,16 @@ class Snake(GameObject):
         )
         if len(self.positions) > self.length:
             self.last = self.positions.pop()
-        elif len(self.positions) == self.length:
+        else:
             self.last = None
 
     def draw(self):
         """Рисует змейку на экране."""
         if self.last:
             pg.draw.rect(
-                screen, BOARD_BACKGROUND_COLOR,
-                (*self.last, GRID_SIZE, GRID_SIZE)
+                screen,
+                BOARD_BACKGROUND_COLOR,
+                self.last + (GRID_SIZE, GRID_SIZE)
             )
         for position in self.positions:
             self.draw_rect(position, self.body_color)
