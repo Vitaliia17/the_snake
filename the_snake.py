@@ -1,3 +1,4 @@
+import sys
 from random import choice
 
 import pygame as pg
