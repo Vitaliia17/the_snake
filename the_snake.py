@@ -96,7 +96,6 @@ class Snake(GameObject):
             (SCREEN_WIDTH // 2 // GRID_SIZE * GRID_SIZE,
              SCREEN_HEIGHT // 2 // GRID_SIZE * GRID_SIZE)
         ]
-        self.direction = choice([UP, DOWN, LEFT, RIGHT])
         self.next_direction = None
         self.last = None
 
